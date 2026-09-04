@@ -1,7 +1,7 @@
 Feature: The Internet
   This feature covers (some) Example pages on 'the-internet.herokuapp.com'
 
-  @TEST_TI_0001
+  @TEST_TI_0001 @additionalTagRamdale
   Scenario: Homepage has a list of links to Expected examples
     Given the page under test is 'https://the-internet.herokuapp.com'
     And an example Home Page step
