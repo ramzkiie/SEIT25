@@ -5,6 +5,9 @@ import io.cucumber.java.AfterStep;
 import io.cucumber.java.Before;
 import io.cucumber.java.BeforeStep;
 import io.cucumber.java.Scenario;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.logging.Level;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -20,6 +23,10 @@ public class Hooks extends Context {
 
   @Before()
   public void before() {
+    Path localDriver = Paths.get("drivers", "chromedriver.exe").toAbsolutePath();
+    if (Files.exists(localDriver)) {
+      System.setProperty("webdriver.chrome.driver", localDriver.toString());
+    }
     ChromeOptions options = new ChromeOptions();
     LoggingPreferences logPrefs = new LoggingPreferences();
     logPrefs.enable(LogType.BROWSER, Level.ALL);
@@ -43,8 +50,10 @@ public class Hooks extends Context {
 
   @After
   public void after() {
-    getDriver().quit();
-    System.out.println("Quit driver");
+    if (getDriver() != null) {
+      getDriver().quit();
+      System.out.println("Quit driver");
+    }
   }
 
 }

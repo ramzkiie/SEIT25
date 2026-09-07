@@ -17,7 +17,7 @@ public class Page {
 
   public void waitForPageLoad() {
     try {
-      Thread.sleep(Duration.ofSeconds(5));
+      Thread.sleep(Duration.ofSeconds(5).toMillis());
     } catch (InterruptedException e) {
       throw new RuntimeException(e);
     }
